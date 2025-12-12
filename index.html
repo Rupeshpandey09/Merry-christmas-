@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Something Special is Coming... 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        /* Countdown Section */
+        .countdown-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #1a472a 0%, #0f2818 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .snowflake {
+            position: absolute;
+            color: white;
+            font-size: 20px;
+            animation: fall linear infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-10vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            color: #ff69b4;
+            font-size: 24px;
+            animation: float 15s infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .countdown-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 60px 40px;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+            max-width: 600px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .countdown-title {
+            font-size: 2.5em;
+            color: #ff69b4;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .christmas-emoji {
+            font-size: 1.2em;
+            display: inline-block;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .time-box {
+            background: linear-gradient(135deg, #ff69b4, #ff1493);
+            padding: 20px;
+            border-radius: 15px;
+            min-width: 100px;
+            color: white;
+        }
+
+        .time-number {
+            font-size: 3em;
+            font-weight: bold;
+            display: block;
+        }
+
+        .time-label {
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .daily-message {
+            margin-top: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #ffeef8, #ffe0f0);
+            border-radius: 20px;
+            border-left: 5px solid #ff69b4;
+        }
+
+        .daily-message p {
+            font-size: 1.3em;
+            line-height: 1.8;
+            color: #333;
+            font-style: italic;
+        }
+
+        /* Black Screen Transition */
+        .black-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            display: none;
+            z-index: 9999;
+        }
+
+        /* Fireworks */
+        .fireworks-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            display: none;
+            z-index: 10000;
+        }
+
+        .firework {
+            position: absolute;
+            border-radius: 50%;
+            animation: explode 2s ease-out forwards;
+        }
+
+        @keyframes explode {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(20);
+                opacity: 0;
+            }
+        }
+
+        /* Main Content */
+        .main-content {
+            display: none;
+            background: linear-gradient(135deg, #ffeef8 0%, #ffe0f0 100%);
+        }
+
+        /* Christmas Tree Section */
+        .tree-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            position: relative;
+        }
+
+        .tree-container {
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .star {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 60px;
+            animation: twinkle 1s infinite alternate;
+            filter: drop-shadow(0 0 10px gold);
+        }
+
+        @keyframes twinkle {
+            from { opacity: 1; }
+            to { opacity: 0.5; }
+        }
+
+        .tree-layer {
+            width: 0;
+            height: 0;
+            border-left: 80px solid transparent;
+            border-right: 80px solid transparent;
+            border-bottom: 120px solid #228B22;
+            margin: -20px auto;
+            position: relative;
+        }
+
+        .tree-layer:nth-child(2) { 
+            border-left-width: 100px;
+            border-right-width: 100px;
+            border-bottom-color: #32CD32;
+        }
+
+        .tree-layer:nth-child(3) { 
+            border-left-width: 120px;
+            border-right-width: 120px;
+            border-bottom-color: #228B22;
+        }
+
+        .tree-trunk {
+            width: 60px;
+            height: 80px;
+            background: #8b4513;
+            margin: 0 auto;
+            border-radius: 5px;
+        }
+
+        .ornament {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .wishes-box {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            max-width: 500px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+            border: 3px solid #ff69b4;
+        }
+
+        .wishes-box:hover {
+            transform: scale(1.05);
+        }
+
+        .wishes-box h2 {
+            color: #ff69b4;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .wishes-box p {
+            font-size: 1.2em;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .santa-container {
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .santa {
+            font-size: 120px;
+            animation: wave 2s infinite;
+            display: inline-block;
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-15deg); }
+            75% { transform: rotate(15deg); }
+        }
+
+        /* Love Sections */
+        .love-section {
+            min-height: 100vh;
+            padding: 80px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .love-card {
+            background: white;
+            padding: 60px 40px;
+            border-radius: 30px;
+            max-width: 800px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            margin: 20px;
+            border-left: 8px solid #ff69b4;
+        }
+
+        .love-card h2 {
+            color: #ff69b4;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .love-card p {
+            font-size: 1.3em;
+            line-height: 2;
+            color: #444;
+            text-align: center;
+        }
+
+        .special-memory {
+            background: linear-gradient(135deg, #ff69b4, #ff1493);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin: 30px 0;
+            text-align: center;
+            font-size: 1.2em;
+            box-shadow: 0 10px 30px rgba(255,105,180,0.3);
+        }
+
+        /* Floating elements */
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Distance Bridge Section */
+        .distance-bridge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .bridge-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .bridge-content h2 {
+            font-size: 3em;
+            margin-bottom: 40px;
+        }
+
+        .hearts-bridge {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            font-size: 3em;
+            margin: 40px 0;
+        }
+
+        .pulse {
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Countdown Section -->
+    <div class="countdown-section" id="countdownSection">
+        <div class="hearts" id="heartsContainer"></div>
+        <div class="countdown-container">
+            <h1 class="countdown-title">Something Special is Coming... 💕 <span class="christmas-emoji">🎄</span></h1>
+            <div class="countdown-timer" id="countdown"></div>
+            <div class="daily-message" id="dailyMessage"></div>
+        </div>
+    </div>
+
+    <!-- Black Screen Transition -->
+    <div class="black-screen" id="blackScreen"></div>
+
+    <!-- Fireworks -->
+    <div class="fireworks-container" id="fireworksContainer"></div>
+
+    <!-- Main Content (After Dec 25) -->
+    <div class="main-content" id="mainContent">
+        <!-- Christmas Tree Section -->
+        <div class="tree-section">
+            <h1 style="color: #ff69b4; font-size: 3em; margin-bottom: 40px;">Merry Christmas Meri Jaan! 🎄</h1>
+            
+            <div class="tree-container">
+                <div class="star">⭐</div>
+                <div class="tree-layer"></div>
+                <div class="tree-layer"></div>
+                <div class="tree-layer"></div>
+                <div class="tree-trunk"></div>
+            </div>
+
+            <div class="santa-container">
+                <div class="santa">🎅</div>
+                <p style="font-size: 1.5em; color: #ff69b4; margin-top: 20px;">Santa came with love for you!</p>
+            </div>
+
+            <div class="wishes-box" id="wishesBox">
+                <h2>🎁 Tap for Santa's Special Wish 🎁</h2>
+                <p id="santaMessage">Click me to hear something magical!</p>
+            </div>
+        </div>
+
+        <!-- Why This Day is Important -->
+        <div class="love-section" style="background: linear-gradient(135deg, #ffeef8 0%, #fff5f8 100%);">
+            <div class="love-card floating">
+                <h2>Why December 25th Changed Everything 💫</h2>
+                <p>
+                    My Angel, this day is not just Christmas for me anymore. This is the day when everything changed in my life. On 25th December, for the first time, I felt truly loved by you. It wasnt planned, it happened by mistake, but that mistake became the most beautifull moment of my life.
+                </p>
+                <div class="special-memory">
+                    ✨ That innocent kiss while you were sleeping during our phone call... that moment is forever in my heart ✨
+                </div>
+                <p>
+                    I felt something different that day. Something I never felt before. That day showed me what real love feels like. Since then, every December 25th will always reminde me of the day I started feeling truly alive with you.
+                </p>
+            </div>
+        </div>
+
+        <!-- How Important She Is -->
+        <div class="love-section" style="background: linear-gradient(135deg, #fff5f8 0%, #ffe0f0 100%);">
+            <div class="love-card floating">
+                <h2>How Important You Are to Me 💖</h2>
+                <p>
+                    My Baby, you are not just important to me - you are everything to me. Without you, my life feels incomplete. You are the reason I smile everyday, the reason I wake up with hope, and the reason I belive in love.
+                </p>
+                <p style="margin-top: 30px;">
+                    When I talk to you, the whole world dissapears. Your voice is my favorite sound. Your happiness is my biggest goal. Your presence in my life, even through phone, makes me feel like the luckiest person alive.
+                </p>
+                <p style="margin-top: 30px; color: #ff1493; font-weight: bold;">
+                    You are not just a part of my life, Meri Jaan - you ARE my life. 💕
+                </p>
+            </div>
+        </div>
+
+        <!-- How Much I Love Her -->
+        <div class="love-section" style="background: linear-gradient(135deg, #ffe0f0 0%, #ffd0e8 100%);">
+            <div class="love-card floating">
+                <h2>How Much I Love You ❤️</h2>
+                <p>
+                    My Angel, words will never be enough to explain how much I love you. My love for you is deeper than oceans, higher than mountains, and endless like the sky. Every beat of my heart says your name.
+                </p>
+                <p style="margin-top: 30px;">
+                    I love the way you talk, the way you laugh, the way you get angry, the way you care for me. I love everything about you - your imperfections make you even more perfect for me. When you are happy, I feel like I have won the world.
+                </p>
+                <p style="margin-top: 30px; font-size: 1.4em; color: #ff1493;">
+                    I love you more than I love myself. You are my heartbeat, My Baby. 💗
+                </p>
+            </div>
+        </div>
+
+        <!-- Making Her Feel Special -->
+        <div class="love-section" style="background: linear-gradient(135deg, #ffd0e8 0%, #ffc0e0 100%);">
+            <div class="love-card floating">
+                <h2>You Are More Than Enough For Me 🌟</h2>
+                <p>
+                    Meri Jaan, I want you to know something very important - YOU ARE ENOUGH. You are more than enough for me. You dont need to change anything about yourself. You are perfect just the way you are.
+                </p>
+                <p style="margin-top: 30px;">
+                    Sometimes you might feel you are not doing enough, but trust me, your presence alone is everything I need. Your love, your care, your time - everything you give me is precious and more than I could ever ask for.
+                </p>
+                <p style="margin-top: 30px;">
+                    You complete me in every way. I dont need anything else in this world if I have you. You are my happiness, my peace, my home. With you, I feel complete.
+                </p>
+                <div class="special-memory" style="margin-top: 40px;">
+                    My Angel, you are the most special person in my life. Never forget that you are enough - more than enough - for me. I love you exactly as you are. 💕✨
+                </div>
+            </div>
+        </div>
+
+        <!-- Distance Bridge Section -->
+        <div class="distance-bridge">
+            <div class="bridge-content">
+                <h2>We Are Not Far Apart 💞</h2>
+                <div class="hearts-bridge">
+                    <span class="pulse">❤️</span>
+                    <span>→</span>
+                    <span>💫</span>
+                    <span>→</span>
+                    <span class="pulse">❤️</span>
+                </div>
+                <p style="font-size: 1.4em; line-height: 2; margin-top: 40px;">
+                    My Baby, I know we are in different places, but in my heart, you are always with me. Distance is just a number - our love is bigger than any distance. Every night when we talk, I feel you right next to me.
+                </p>
+                <p style="font-size: 1.4em; line-height: 2; margin-top: 30px;">
+                    That kiss you gave me while sleeping - it reached my soul even through the phone. Thats how close we are. Our hearts are connected, and no distance can break that connection. We are together, always. 💕
+                </p>
+                <p style="font-size: 1.6em; margin-top: 50px; font-weight: bold;">
+                    You are not far, Meri Jaan. You are here, in my heart, every single moment. 💖
+                </p>
+            </div>
+        </div>
+
+        <!-- Final Message -->
+        <div class="love-section" style="background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%); color: white;">
+            <div class="love-card" style="background: rgba(255,255,255,0.95); border: none;">
+                <h2>Merry Christmas My Love! 🎄💕</h2>
+                <p>
+                    This website is my small gift to show you how much you mean to me. From that special December 25th till today and forever, you will always be my everything.
+                </p>
+                <p style="margin-top: 30px; font-size: 1.5em; color: #ff1493; font-weight: bold;">
+                    I love you, Meri Jaan. I love you, My Angel. I love you, My Baby. 
+                </p>
+                <p style="margin-top: 30px; font-size: 1.3em;">
+                    Forever and Always Yours ❤️
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <audio id="christmasSound" src="data:audio/mpeg;base64,//uQx..."></audio>
+
+    <script>
+        // Daily messages for each day
+        const dailyMessages = {
+            '2024-12-11': 'Meri Jaan, just 14 more days until the most special day! December 25th is when I first felt your love in my heart. That innocent kiss while you were sleeping... it changed my whole world. I cant stop thinking about that moment. You are my everything, My Angel. 💕',
+            
+            '2024-12-12': 'My Baby, 13 days to go! Every night when we talk on phone, I feel so close to you. That day when you kissed me in your sleep, I realized how pure your love is. Its not about distance, its about hearts connected. I miss you so much, Meri Jaan! 💖',
+            
+            '2024-12-13': 'My Angel, only 12 more days! Do you remember that special night? Your voice was so soft, and then that kiss happened. I was so surprised but so happy! That moment showed me what real love feels like. You are my dream come true! 🌟',
+            
+            '2024-12-14': 'Meri Jaan, 11 days left! This day is coming closer and my heart beats faster. December 25th is not just a date anymore, its the day that gave me you. That sleeping kiss was the most beautifull accident of my life. I love you so much, My Baby! 💗',
+            
+            '2024-12-15': 'My Baby, 10 more days! I still remember every detail of that call - your breathing, your soft voice, and then suddenly that kiss! I felt like the luckiest person alive. You make my life so meaningful, My Angel. Counting every second! 💕',
+            
+            '2024-12-16': 'My Angel, 9 days remaining! Sometimes I play that moment in my mind again and again. How you kissed me without even knowing... it was so innocent and pure. That day I understood that love doesnt need words, Meri Jaan. You are my heartbeat! 💖',
+            
+            '2024-12-17': 'Meri Jaan, just 8 days now! Every day brings me closer to celebrating our special day. That December 25th kiss is the reason I smile everyday. You dont know how much happiness you brought in my life, My Baby. I am so grateful for you! 🌟',
+            
+            '2024-12-18': 'My Baby, 7 days to go! One week left! I want to tell the whole world how special you are to me. That night when you kissed me in sleep, something changed inside me forever. I knew you were the one, My Angel. I love you more than life! 💗',
+            
+            '2024-12-19': 'My Angel, 6 more days! I cant contain my excitement! December 25th is almost here. That moment when I felt your love for the first time is still fresh in my memory. You make everything beautifull, Meri Jaan. You are my reason to live! 💕',
+            
+            '2024-12-20': 'Meri Jaan, only 5 days left! So close now! That kiss you gave me while sleeping was not a mistake for me - it was destiny. It was meant to happen because we are meant to be together. You complete me, My Baby! 💖',
+            
+            '2024-12-21': 'My Baby, 4 days remaining! When you kissed me that night, you probably dont even remember, but I will never forget. It was the moment I felt truly loved. December 25th will always be our day, My Angel. I cherish you so much! 🌟',
+            
+            '2024-12-22': 'My Angel, just 3 days now! My heart is so full of love for you! That special December 25th is coming again, and I want to celebrate it with all my heart. That sleeping kiss showed me your pure soul. You are perfect for me, Meri Jaan! 💗',
+            
+            '2024-12-23': 'Meri Jaan, only 2 more days! Can you believe it? Our special day is almost here! That moment when you kissed me in your sleep - it was the beginning of everything beautifull in my life. I am so lucky to have you, My Baby! 💕',
+            
+            '2024-12-24': 'My Baby, TOMORROW IS THE DAY! Just few hours left until December 25th! I am so excited! That day when I first felt your love, when you kissed me while sleeping on our phone call - its coming again! Get ready for something very special, My Angel! I love you endlessly! 💖🎄✨'
+        };
+
+        // FOR REAL: Set to Dec 25, 2025, 12:00 AM (after Dec 24, 2025, 11:59 PM)
+        const DEMO_MODE = false;
+        
+        // Create target date properly
+        let targetDate;
+        if (DEMO_MODE) {
+            const now = new Date();
+            targetDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 13, 2, 0, 0); // 1:02 PM today
+        } else {
+            targetDate = new Date(2025, 11, 25, 0, 0, 0, 0); // Dec 25, 2025, 12:00 AM (month is 0-indexed, so 11 = December)
+        }
+
+        let celebrationStarted = false;
+        
+        console.log('Target Date:', targetDate);
+        console.log('Current Date:', new Date());
+
+        // Create floating hearts and snowflakes
+        function createHearts() {
+            const container = document.getElementById('heartsContainer');
+            
+            // Add hearts
+            for(let i = 0; i < 15; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '💕';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 15 + 's';
+                heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
+                container.appendChild(heart);
+            }
+            
+            // Add snowflakes for Christmas feel
+            for(let i = 0; i < 20; i++) {
+                const snow = document.createElement('div');
+                snow.className = 'snowflake';
+                snow.innerHTML = '❄️';
+                snow.style.left = Math.random() * 100 + '%';
+                snow.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                snow.style.animationDelay = Math.random() * 5 + 's';
+                snow.style.fontSize = (Math.random() * 15 + 15) + 'px';
+                container.appendChild(snow);
+            }
+        }
+
+        // Update countdown
+        function updateCountdown() {
+            const now = new Date();
+            const distance = targetDate.getTime() - now.getTime();
+
+            console.log('Distance:', distance, 'seconds left:', Math.floor(distance/1000));
+
+            // Only start celebration once and when time is reached or passed
+            if (distance <= 0 && !celebrationStarted) {
+                celebrationStarted = true;
+                console.log('Starting celebration now!');
+                startCelebration();
+                return;
+            }
+
+            if (celebrationStarted) {
+                return; // Already celebrating
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('countdown').innerHTML = `
+                <div class="time-box">
+                    <span class="time-number">${days}</span>
+                    <span class="time-label">Days</span>
+                </div>
+                <div class="time-box">
+                    <span class="time-number">${hours}</span>
+                    <span class="time-label">Hours</span>
+                </div>
+                <div class="time-box">
+                    <span class="time-number">${minutes}</span>
+                    <span class="time-label">Minutes</span>
+                </div>
+                <div class="time-box">
+                    <span class="time-number">${seconds}</span>
+                    <span class="time-label">Seconds</span>
+                </div>
+            `;
+
+            // Show daily message
+            const today = now.toISOString().split('T')[0];
+            const message = dailyMessages[today] || dailyMessages['2024-12-11'];
+            document.getElementById('dailyMessage').innerHTML = `<p>${message}</p>`;
+        }
+
+        // Start celebration
+        function startCelebration() {
+            // Black screen
+            document.getElementById('blackScreen').style.display = 'block';
+            
+            setTimeout(() => {
+                // Start fireworks
+                document.getElementById('blackScreen').style.display = 'none';
+                const fireworksContainer = document.getElementById('fireworksContainer');
+                fireworksContainer.style.display = 'block';
+                startFireworks();
+                
+                // After 20 seconds, wait for all fireworks to complete animation
+                setTimeout(() => {
+                    // Wait additional 2 seconds for last fireworks to fully disappear
+                    setTimeout(() => {
+                        fireworksContainer.style.display = 'none';
+                        document.getElementById('countdownSection').style.display = 'none';
+                        document.getElementById('mainContent').style.display = 'block';
+                        addTreeOrnaments();
+                    }, 2000);
+                }, 20000); // 20 seconds of fireworks
+            }, 2000);
+        }
+
+        // Fireworks animation
+        function startFireworks() {
+            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ff69b4', '#ffa500'];
+            const container = document.getElementById('fireworksContainer');
+            
+            const interval = setInterval(() => {
+                for(let i = 0; i < 3; i++) {
+                    const firework = document.createElement('div');
+                    firework.className = 'firework';
+                    firework.style.left = Math.random() * 100 + '%';
+                    firework.style.top = Math.random() * 100 + '%';
+                    firework.style.width = '10px';
+                    firework.style.height = '10px';
+                    firework.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    container.appendChild(firework);
+                    
+                    setTimeout(() => firework.remove(), 2000);
+                }
+            }, 400); // Slower speed - fires every 400ms instead of 200ms
+
+            setTimeout(() => clearInterval(interval), 20000); // Stop after 20 seconds
+        }
+
+        // Add ornaments to tree
+        function addTreeOrnaments() {
+            const colors = ['#ff0000', '#dc143c', '#8b0000', '#ff6347', '#cd5c5c']; // Red colors only
+            const layers = document.querySelectorAll('.tree-layer');
+            
+            layers.forEach(layer => {
+                for(let i = 0; i < 8; i++) {
+                    const ornament = document.createElement('div');
+                    ornament.className = 'ornament';
+                    ornament.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    ornament.style.left = (Math.random() * 80 + 10) + '%';
+                    ornament.style.top = (Math.random() * 80 + 10) + '%';
+                    ornament.style.animationDelay = Math.random() * 1.5 + 's';
+                    layer.appendChild(ornament);
+                }
+            });
+        }
+
+        // Wishes box click
+        document.getElementById('wishesBox').addEventListener('click', function() {
+            this.querySelector('p').innerHTML = `
+                My Dearest Angel, Merry Christmas! 🎄<br><br>
+                You are the most special gift in my life. That December 25th when I first felt your love, it was the best moment of my entire life. You make every day magical, My Baby!<br><br>
+                I wish you all the happiness in the world. May all your dreams come true. You deserve everything beautifull because you are so pure and lovely.<br><br>
+                I love you more than words can say, Meri Jaan! 💕<br><br>
+                - With all my love, always yours ❤️
+            `;
+            
+            // Play Merry Christmas sound
+            playChristmasSound();
+        });
+
+        function playChristmasSound() {
+            // Create audio element for Merry Christmas song
+            const audio = new Audio();
+            // Note: You'll need to add actual audio file URL here
+            // For now, this will alert
+            alert('🎵 Merry Christmas, My Love! 🎵');
+        }
+
+        // Initialize
+        createHearts();
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
